@@ -1,0 +1,35 @@
+  /* Navigation Styles */
+.navbar {
+    margin-bottom: 20px;
+  }
+  
+  .navbar-brand img {
+    height: 56px;
+    width: 40px;
+    margin-left: 1rem;
+  }
+  
+
+  .nav-link {
+    color: #ffffff !important;
+  }
+  
+  .nav-link:hover {
+    color: var(--secondary-color) !important;
+    font-weight: bold;
+  }
+  
+  .navbar .iconSearch {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+
+
+  /* Footer Styles */
+.footer-page {
+    background-color: #97D7FB;
+    min-height: 25vh;
+}
+
+.nav-bar {
+    background-color: #97D7FB;}

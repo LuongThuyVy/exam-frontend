@@ -1,0 +1,75 @@
+@import './components/Register/Register.css';
+@import './components/Layout/Layout.css';
+
+
+:root {
+    --primary-color: #17a2b8; 
+    --secondary-color: #2b67a3;
+    --text-color: white; 
+    --padding: 10px;
+    --hover-bg-color: #3498db; /* Màu nền khi hover */
+    --hover-text-color: white; /* Màu chữ khi hover */
+    --transition-time: 0.3s; /* Thời gian chuyển đổi */
+}
+
+.hover-effect:hover {
+  background-color: var(--hover-bg-color);
+  color: var(--hover-text-color);
+  transition: background-color var(--transition-time) ease, color var(--transition-time) ease;
+}
+
+body {
+    /* margin: 0; */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    
+  }
+  
+  .btn-cus{
+   
+  }
+
+  .form-container {
+    margin-bottom: 50px; 
+  }
+
+  .App {
+    
+  }
+ 
+
+  
+  /* Not Found Page Styles */
+  .not-found {
+    padding: 20px;
+  }
+  
+  .not-found h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .not-found p {
+    font-size: 1.2rem;
+  }
+  
+ 
+
+.page-wrapper > div {
+  padding: 20px 40px;
+  min-height: 75vh;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: var(--padding);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+}

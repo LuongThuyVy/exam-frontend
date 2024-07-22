@@ -1,0 +1,56 @@
+@import './components/Register/Register.css';
+@import './components/Layout/Layout.css';
+
+
+:root {
+    --primary-color: #17a2b8; 
+    --secondary-color: #2b67a3;
+    --text-color: white; 
+    --padding: 10px;
+
+}
+/* General Styles */
+body {
+    /* margin: 0; */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    
+  }
+  
+  .btn-cus{
+    width: 100% !important; 
+  }
+
+  .form-container {
+    margin-bottom: 50px; 
+  }
+
+  .App {
+    
+  }
+  
+  /* Header Styles */
+ 
+
+  
+  /* Not Found Page Styles */
+  .not-found {
+    padding: 20px;
+  }
+  
+  .not-found h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .not-found p {
+    font-size: 1.2rem;
+  }
+  
+ 
+
+.page-wrapper > div {
+  padding: 20px 40px;
+  min-height: 75vh;
+}

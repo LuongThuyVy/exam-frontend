@@ -1,0 +1,79 @@
+/* Container for the registration form */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Heading for the form */
+  .container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff; /* Change to your preferred color */
+  }
+  
+  /* Form elements */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Form labels */
+  .form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333; /* Darker text color for readability */
+  }
+  
+  /* Form controls */
+  .form-control {
+    border-radius: 0.25rem; /* Rounded corners for form controls */
+    border: 1px solid #ced4da;
+    padding: 10px;
+  }
+  
+  /* Invalid form controls */
+  .is-invalid {
+    border-color: #dc3545;
+  }
+  
+  /* Feedback text for invalid controls */
+  .form-control-feedback {
+    color: #dc3545;
+  }
+  
+  /* Checkbox and its label */
+  .form-check {
+    margin-top: 10px;
+  }
+  
+  .form-check-label {
+    margin-left: 5px;
+  }
+  
+  /* Submit button */
+  .btn-primary {
+    background-color: #007bff; /* Change to your preferred color */
+    border-color: #007bff;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0.25rem;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+    border-color: #004085;
+  }
+  
+  /* Link to login page */
+  p {
+    text-align: center;
+  }
+  
+  p a {
+    color: #007bff; /* Change to your preferred color */
+  }
+  
+  p a:hover {
+    text-decoration: underline;
+  }
+  
