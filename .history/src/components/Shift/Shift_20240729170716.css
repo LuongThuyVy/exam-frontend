@@ -1,0 +1,17 @@
+/* Center the button in the modal footer */
+.modal-footer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Center the modal title */
+  .modal-title {
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* Center the modal body text */
+  .modal-body p {
+    text-align: center;
+  }
+  

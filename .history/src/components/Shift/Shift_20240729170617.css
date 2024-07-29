@@ -1,0 +1,6 @@
+    /* Center the button in the modal footer */
+.modal-footer {
+    display: flex;
+    justify-content: center;
+  }
+  

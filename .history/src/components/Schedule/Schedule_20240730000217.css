@@ -1,0 +1,9 @@
+/* Center modal vertically with slight adjustment */
+.modal-dialog-centered-custom {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+  }
+  
+
+  

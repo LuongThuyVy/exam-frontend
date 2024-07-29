@@ -1,0 +1,28 @@
+/* Center the button in the modal footer */
+.modal-footer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Center the modal title */
+  .modal-title {
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* Center the modal body text */
+  .modal-body p {
+    text-align: center;
+  }
+  
+  /* Manage spacing between elements in the card */
+  .exam-shift-details > div,
+  .exam-shift-expanded-details > p {
+    margin-bottom: 1rem; /* Adjust spacing as needed */
+  }
+  
+  /* Adjust margin for individual detail elements */
+  .exam-shift-expanded-details p {
+    margin-bottom: 1rem; /* Maintain consistent spacing */
+  }
+  
