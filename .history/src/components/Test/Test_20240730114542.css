@@ -1,0 +1,30 @@
+/* Test.css */
+.current-question {
+    /* background-color: #e9ecef; Light background for the outline */
+    /* border: 2px solid #007bff; Blue border */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold text */
+  }
+  
+  .bg-success {
+    background-color: #83ed9c; 
+    font-size: 1.5rem; /* Larger font size */
+    /* Green background for answered questions */
+  }
+  
+  .bg-danger {
+    background-color: #e0858c;
+    font-size: 1.5rem; /* Larger font size */
+     /* Red background for unanswered questions */
+  }
+  
+  .question-status-table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .question-status-table td {
+    height: 40px;
+    width: 40px;
+  }
+  

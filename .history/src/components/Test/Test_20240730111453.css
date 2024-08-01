@@ -1,0 +1,20 @@
+.question-status-table {
+    width: 100%;
+    max-width: 200px; /* Set maximum width for the table */
+    margin-left: auto; /* Align to the right */
+    margin-right: 0;
+  }
+  
+  .question-status-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    z-index: 1000; /* Ensure it stays above other content */
+  }
+  
+  .table td {
+    width: 2rem;
+    height: 2rem;
+  }
+  

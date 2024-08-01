@@ -1,0 +1,50 @@
+.score-container {
+    text-align: center;
+}
+
+.score-circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+/* Remove border and set the background color for the circle */
+.circle-bg {
+    fill: none; /* Ensures no fill color */
+    stroke: none; /* Removes any stroke or border */
+}
+
+/* Style for the progress circle */
+.circle-progress {
+    fill: none;
+    stroke: #007bff; /* Color for the progress circle */
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s ease;
+}
+
+/* Style for the text inside the circle */
+.score-text {
+    font-size: 18px;
+    font-weight: bold;
+    fill: #007bff;
+    dominant-baseline: middle;
+}
+
+
+
+.score-circle {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    line-height: 50px;
+    text-align: center;
+    font-size: 18px;
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 10px;
+}

@@ -1,0 +1,43 @@
+/* Flex container to align Score and Completion Time on the same line */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 2rem; /* Ensure equal padding on left and right */
+}
+
+/* Style for the completion time and score containers */
+.completion-time, .score-container {
+    flex: 1;
+    text-align: center; Center align text within each container
+}
+
+/* Container for the score circle */
+.score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for the score circle */
+.score-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Adjust the size of the circle */
+    height: 60px; /* Adjust the size of the circle */
+    border-radius: 50%;
+    border: 2px solid #007bff; /* Circle border color */
+    color: #007bff; /* Text color */
+    font-size: 24px; /* Font size for the score */
+    font-weight: bold;
+    background-color: transparent; /* No background color */
+}
+
+/* Center the button horizontally */
+.btn-container {
+    text-align: center;
+    margin-top: 1rem;
+}

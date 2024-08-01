@@ -1,0 +1,27 @@
+/* Test.css */
+.question-status-table {
+    border-collapse: separate; /* Ensure space between cells */
+    border-spacing: 10px; /* Space between cells */
+  }
+  
+  .question-status-table td {
+    cursor: pointer;
+    padding: 12px; /* Increase padding for better spacing */
+    text-align: center;
+    border: none; /* Remove border */
+  }
+  
+  .bg-success {
+    background-color: #d4edda; /* Greenish background for answered questions */
+  }
+  
+  .bg-danger {
+    background-color: #f8d7da; /* Reddish background for unanswered questions */
+  }
+  
+  .current-question {
+    background-color: inherit; /* Inherit background color from the cell status */
+    font-weight: bold; /* Make the text bold */
+    color: #007bff; /* Text color to match the default color scheme */
+  }
+  

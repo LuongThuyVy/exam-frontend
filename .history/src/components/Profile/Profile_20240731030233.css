@@ -1,0 +1,52 @@
+.user-info-card {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .user-info-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-info-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  
+  .form-column {
+    flex: 1;
+    margin-right: 15px;
+  }
+  
+  .form-column:last-child {
+    margin-right: 0;
+  }
+  
+  .user-info-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-info-column {
+    flex: 1;
+  }
+  
+  .edit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-button:hover {
+    color: #007bff;
+  }
+  

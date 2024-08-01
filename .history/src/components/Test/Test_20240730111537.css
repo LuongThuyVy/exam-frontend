@@ -1,0 +1,23 @@
+.question-status-table {
+    width: 100%;
+    max-width: 200px; /* Set maximum width for the table */
+    margin: 0; /* Remove margin for better positioning */
+  }
+  
+  .question-status-container {
+    position: fixed;
+    right: 10px; /* Adjust distance from the right edge */
+    bottom: 10px; /* Adjust distance from the bottom edge */
+    padding: 10px;
+    z-index: 1000; /* Ensure it stays above other content */
+    background-color: white; /* Optional: Add background color to make it more visible */
+    border: 1px solid #ddd; /* Optional: Add border for better visibility */
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+  
+  .table td {
+    width: 2rem;
+    height: 2rem;
+    text-align: center; /* Center align text in cells */
+  }
+  

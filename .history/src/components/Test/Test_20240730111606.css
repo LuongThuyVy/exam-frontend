@@ -1,0 +1,11 @@
+.question-status-container {
+    position: fixed;
+    right: 10px; /* Adjust distance from the right edge */
+    top: 70px; /* Adjust distance from the top edge */
+    padding: 10px;
+    z-index: 1000; /* Ensure it stays above other content */
+    background-color: white; /* Optional: Add background color to make it more visible */
+    border: 1px solid #ddd; /* Optional: Add border for better visibility */
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+  

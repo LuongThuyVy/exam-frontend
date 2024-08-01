@@ -1,0 +1,36 @@
+.score-container {
+    text-align: center;
+}
+
+.score-circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+.score-circle {
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #e4737359;
+    stroke-width: 10;
+}
+
+.circle-progress {
+    fill: none;
+    stroke: #;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s ease;
+}
+
+.score-text {
+    font-size: 18px;
+    font-weight: bold;
+    fill: #ff0008;
+    dominant-baseline: middle;
+}

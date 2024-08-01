@@ -1,0 +1,36 @@
+.question-status-container {
+    position: fixed;
+    right: 10px; /* Adjust distance from the right edge */
+    top: 70px; /* Adjust distance from the top edge */
+    padding: 10px;
+    z-index: 1000; /* Ensure it stays above other content */
+    border: 1px solid #ddd; /* Optional: Add border for better visibility */
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+  
+  .question-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr)); /* Ensure columns fit the container */
+    gap: 5px; /* Space between cells */
+  }
+  
+  .question-status div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Set fixed width for each cell */
+    height: 30px; /* Set fixed height for each cell */
+    border: 1px solid #ddd; /* Border for each cell */
+    border-radius: 5px; /* Rounded corners for cells */
+    font-size: 14px; /* Font size for the numbers */
+    color: #fff; /* Font color for better visibility */
+  }
+  
+  .question-status div.completed {
+    background-color: #4caf50; /* Green background for completed */
+  }
+  
+  .question-status div.incomplete {
+    background-color: #f44336; /* Red background for incomplete */
+  }
+  

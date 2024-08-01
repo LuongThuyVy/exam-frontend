@@ -1,0 +1,43 @@
+.question-status-container {
+    position: fixed;
+    right: 50px; /* Adjust distance from the right edge */
+    top: 100px; /* Adjust distance from the top edge */
+    padding: 10px;
+    z-index: 1000; /* Ensure it stays above other content */
+    border: 1px solid #ddd; /* Optional: Add border for better visibility */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    background: #f8f9fa; /* Light background for readability */
+  }
+  
+  .question-status-table {
+    border-collapse: collapse;
+    width: 150px; /* Set a fixed width for the status table */
+    margin-bottom: 10px; /* Space between the table and the timer */
+  }
+  
+  .question-status-table td {
+    width: 30px; /* Set fixed width for each cell */
+    height: 30px; /* Set fixed height for each cell */
+    border: 1px solid #ddd; /* Border for each cell */
+    border-radius: 5px; /* Rounded corners for cells */
+    font-size: 14px; /* Font size for the numbers */
+    color:var(--primary-color); /* Font color for better visibility */
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  .bg-success {
+    background-color: #4caf50; /* Green background for completed */
+  }
+  
+  .bg-danger {
+    background-color: #f44336; /* Red background for incomplete */
+  }
+  
+  .remaining-time {
+    font-size: 16px; /* Font size for the remaining time */
+    text-align: center;
+    margin-bottom: 10px; /* Space between the time and the table */
+  }
+  

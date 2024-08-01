@@ -1,0 +1,64 @@
+.user-info-card {
+    max-width: 600px; 
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-info-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-buttons {
+    display: flex;
+    gap: 10px; /* Điều chỉnh khoảng cách giữa các nút */
+    justify-content: space-between;
+  }
+  
+  
+  .user-info-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  
+  .form-column {
+    flex: 1;
+    margin-right: 15px;
+  }
+  
+  .form-column:last-child {
+    margin-right: 0;
+  }
+  
+  .user-info-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-info-column {
+    flex: 1;
+  }
+  
+  .edit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem ; /* Tăng kích thước của icon */
+    color: #007bff;
+  }
+  
+  .edit-button:hover {
+    color: #0056b3;
+  }
+  
