@@ -81,16 +81,24 @@ const Test = () => {
         QuestionAnswerId: questionId,
         SelectedOption: answers[questionId]
       }));
-
+  
       const completionTime = totalDuration - remainingTime; // Calculate completion time
       localStorage.setItem('completionTime', completionTime);
-
-      const response = await axios.post('http://localhost:8000/api/tests/submit', {
+  
+      const dataToSend = {
         TestId: testId,
         answers: formattedAnswers,
         time: completionTime
+      };
+  
+      console.log('Data to be sent:', dataToSend);
+  
+      formattedAnswers.forEach((answer, index) => {
+        console.log(`Answer ${index + 1}:`, answer);
       });
-
+  
+      const response = await axios.post('http://localhost:8000/api/tests/submit', dataToSend);
+  
       console.log('Submission response:', response.data);
       alert('Your answers have been submitted successfully!');
       
@@ -117,7 +125,7 @@ const Test = () => {
         if (questionIndex >= totalQuestions) break;
 
         const question = questions[questionIndex];
-        const isAnswered = answers[question.Id] !== undefined;
+        const isAnswered = answers[question.question_answer.Id] !== undefined;
         const cellClass = isAnswered ? 'bg-success' : 'bg-danger';
         const isCurrent = questionIndex === currentQuestion;
         const currentQuestionClass = isCurrent ? 'current-question' : '';
@@ -153,43 +161,43 @@ const Test = () => {
                 <h3>Question {currentQuestion + 1}</h3>
                 <p>{questions[currentQuestion].question_answer.Content}</p>
                 <Form>
-                  <Form.Check
-                    type="radio"
-                    id={`optionA-${questions[currentQuestion].Id}`}
-                    label={questions[currentQuestion].question_answer.OptionA}
-                    name={`question-${questions[currentQuestion].Id}`}
-                    value="A"
-                    checked={answers[questions[currentQuestion].Id] === 'A'}
-                    onChange={() => handleOptionChange(questions[currentQuestion].Id, 'A')}
-                  />
-                  <Form.Check
-                    type="radio"
-                    id={`optionB-${questions[currentQuestion].Id}`}
-                    label={questions[currentQuestion].question_answer.OptionB}
-                    name={`question-${questions[currentQuestion].Id}`}
-                    value="B"
-                    checked={answers[questions[currentQuestion].Id] === 'B'}
-                    onChange={() => handleOptionChange(questions[currentQuestion].Id, 'B')}
-                  />
-                  <Form.Check
-                    type="radio"
-                    id={`optionC-${questions[currentQuestion].Id}`}
-                    label={questions[currentQuestion].question_answer.OptionC}
-                    name={`question-${questions[currentQuestion].Id}`}
-                    value="C"
-                    checked={answers[questions[currentQuestion].Id] === 'C'}
-                    onChange={() => handleOptionChange(questions[currentQuestion].Id, 'C')}
-                  />
-                  <Form.Check
-                    type="radio"
-                    id={`optionD-${questions[currentQuestion].Id}`}
-                    label={questions[currentQuestion].question_answer.OptionD}
-                    name={`question-${questions[currentQuestion].Id}`}
-                    value="D"
-                    checked={answers[questions[currentQuestion].Id] === 'D'}
-                    onChange={() => handleOptionChange(questions[currentQuestion].Id, 'D')}
-                  />
-                </Form>
+      <Form.Check
+        type="radio"
+        id={`optionA-${questions[currentQuestion].question_answer.Id}`}
+        label={questions[currentQuestion].question_answer.OptionA}
+        name={`question-${questions[currentQuestion].question_answer.Id}`}
+        value="A"
+        checked={answers[questions[currentQuestion].question_answer.Id] === 'A'}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'A')}
+      />
+      <Form.Check
+        type="radio"
+        id={`optionB-${questions[currentQuestion].question_answer.Id}`}
+        label={questions[currentQuestion].question_answer.OptionB}
+        name={`question-${questions[currentQuestion].question_answer.Id}`}
+        value="B"
+        checked={answers[questions[currentQuestion].question_answer.Id] === 'B'}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'B')}
+      />
+      <Form.Check
+        type="radio"
+        id={`optionC-${questions[currentQuestion].question_answer.Id}`}
+        label={questions[currentQuestion].question_answer.OptionC}
+        name={`question-${questions[currentQuestion].question_answer.Id}`}
+        value="C"
+        checked={answers[questions[currentQuestion].question_answer.Id] === 'C'}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'C')}
+      />
+      <Form.Check
+        type="radio"
+        id={`optionD-${questions[currentQuestion].question_answer.Id}`}
+        label={questions[currentQuestion].question_answer.OptionD}
+        name={`question-${questions[currentQuestion].question_answer.Id}`}
+        value="D"
+        checked={answers[questions[currentQuestion].question_answer.Id] === 'D'}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'D')}
+      />
+    </Form>
               </Card.Body>
               <Card.Footer>
                 <Button
