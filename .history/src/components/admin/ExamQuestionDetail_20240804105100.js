@@ -1,0 +1,114 @@
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { FaTrash } from 'react-icons/fa';
+
+function QuestionsPage() {
+  const { id } = useParams(); 
+  const [examQuestions, setExamQuestions] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
+  const [selectedQuestions, setSelectedQuestions] = useState(new Set());
+
+  useEffect(() => {
+    // Fetch exam questions
+    axios.get(`http://localhost:8000/api/exam-detail/${id}`)
+      .then(response => setExamQuestions(response.data))
+      .catch(error => console.error('Error fetching exam questions:', error));
+
+    // Fetch all questions with condition
+    axios.get(`http://localhost:8000/api/questions/condition/${id}`)
+      .then(response => setAllQuestions(response.data))
+      .catch(error => console.error('Error fetching questions:', error));
+  }, [id]);
+
+  const handleQuestionSelect = (questionId) => {
+    setSelectedQuestions(prevState => {
+      const newState = new Set(prevState);
+      if (newState.has(questionId)) {
+        newState.delete(questionId);
+      } else {
+        newState.add(questionId);
+      }
+      return newState;
+    });
+  };
+
+  const handleAddQuestions = () => {
+    const questionsToAdd = Array.from(selectedQuestions);
+    axios.post(`http://localhost:8000/api/exam-questions/add`, {
+        examId: id,
+        questionIds: questionsToAdd
+    })
+    .then(response => {
+      console.log('Questions added:', response.data);
+      setSelectedQuestions(new Set());
+      // Optionally refresh the exam questions list
+      axios.get(`http://localhost:8000/api/exam-detail/${id}`)
+        .then(response => setExamQuestions(response.data))
+        .catch(error => console.error('Error refreshing exam questions:', error));
+    })
+    .catch(error => console.error('Error adding questions:', error));
+  };
+
+  const handleDeleteQuestion = async (questionId) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/exam-questions/${questionId}`);
+      // Refresh the exam questions list
+      axios.get(`http://localhost:8000/api/exam-detail/${id}`)
+        .then(response => setExamQuestions(response.data))
+        .catch(error => console.error('Error refreshing exam questions:', error));
+    } catch (error) {
+      console.error('Error deleting question:', error);
+    }
+  };
+  
+  return (
+    <Container>
+      <Row>
+        <Col md={6}>
+          <h3>All Questions</h3>
+          {allQuestions.map(q => (
+            <Card key={q.Id} className="mb-3">
+              <Card.Body>
+                <Card.Title>{q.Content}</Card.Title>
+                <Card.Text>Difficulty: {q.Difficulty}</Card.Text>
+                <Form.Check 
+                  type="checkbox"
+                  label="Select"
+                  checked={selectedQuestions.has(q.Id)}
+                  onChange={() => handleQuestionSelect(q.Id)}
+                />
+              </Card.Body>
+            </Card>
+          ))}
+        </Col>
+
+        <Col md={6}>
+          <h3>Exam Questions</h3>
+          {examQuestions.map(q => (
+            <Card key={q.Id} className="mb-3">
+              <Card.Body>
+                <Row>
+                  <Col md={10}>
+                    <Card.Title>{q.Content}</Card.Title>
+                    <Card.Text>Difficulty: {q.Difficulty}</Card.Text>
+                  </Col>
+                  <Col md={2} className="text-right">
+                    <FaTrash
+                      style={{ cursor: 'pointer', color: 'red' }}
+                      onClick={() => handleDeleteQuestion(q.Id)}
+                    />
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          ))}
+          <Button variant="primary" onClick={handleAddQuestions}>Add Selected Questions to Exam</Button>
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+export default QuestionsPage;

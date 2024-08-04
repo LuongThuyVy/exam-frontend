@@ -1,0 +1,35 @@
+.hero {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/public/hero.png');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 20px; /* Adjust this value to position the text and button */
+  width: 100%;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem; /* Adjust font size as needed */
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  font-size: 1.2rem; /* Adjust font size as needed */
+  margin-bottom: 20px;
+}
+
+.hero-content .btn-primary {
+  font-size: 1rem;
+  padding: 10px 20px;
+}
