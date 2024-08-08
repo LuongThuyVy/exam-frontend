@@ -87,7 +87,7 @@ const ExamShiftCard = () => {
 
   const handleCloseModal = () => {
     setShowSuccessModal(false);
-    navigate('/shift'); 
+    window.location.reload(); // Reload the page when the modal is closed
   };
 
   return (
