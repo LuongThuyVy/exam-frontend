@@ -87,7 +87,7 @@ const ExamShiftCard = () => {
 
   const handleCloseModal = () => {
     setShowSuccessModal(false);
-    navigate('/shift'); 
+    navigate('/shifts'); 
   };
 
   return (

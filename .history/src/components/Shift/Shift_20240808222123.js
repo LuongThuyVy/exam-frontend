@@ -87,7 +87,7 @@ const ExamShiftCard = () => {
 
   const handleCloseModal = () => {
     setShowSuccessModal(false);
-    navigate('/shift'); 
+    navigate('/shifts'); // Chuyển hướng lại đến trang shifts để load lại component
   };
 
   return (
