@@ -169,8 +169,7 @@ const Test = () => {
         name={`question-${questions[currentQuestion].question_answer.Id}`}
         value="A"
         checked={answers[questions[currentQuestion].question_answer.Id] === 'A'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'A') : undefined}
-        disabled={remainingTime <= 0}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'A')}
       />
       <Form.Check
         type="radio"
@@ -179,8 +178,7 @@ const Test = () => {
         name={`question-${questions[currentQuestion].question_answer.Id}`}
         value="B"
         checked={answers[questions[currentQuestion].question_answer.Id] === 'B'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'B') : undefined}
-                    disabled={remainingTime <= 0}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'B')}
       />
       <Form.Check
         type="radio"
@@ -189,8 +187,7 @@ const Test = () => {
         name={`question-${questions[currentQuestion].question_answer.Id}`}
         value="C"
         checked={answers[questions[currentQuestion].question_answer.Id] === 'C'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'C') : undefined}
-        disabled={remainingTime <= 0}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'C')}
       />
       <Form.Check
         type="radio"
@@ -199,8 +196,7 @@ const Test = () => {
         name={`question-${questions[currentQuestion].question_answer.Id}`}
         value="D"
         checked={answers[questions[currentQuestion].question_answer.Id] === 'D'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'D') : undefined}
-        disabled={remainingTime <= 0}
+        onChange={() => handleOptionChange(questions[currentQuestion].question_answer.Id, 'D')}
       />
     </Form>
               </Card.Body>
