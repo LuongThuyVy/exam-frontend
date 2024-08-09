@@ -12,39 +12,44 @@ const Test = () => {
   const [answers, setAnswers] = useState({});
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [completionTime, setCompletionTime] = useState(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [timerId, setTimerId] = useState(null);
 
-  useEffect(() => {
-    const examShiftId = localStorage.getItem('examShiftId');
-    const duration = localStorage.getItem('duration');
+useEffect(() => {
+  const examShiftId = localStorage.getItem('examShiftId');
+  const duration = localStorage.getItem('duration');
 
-    if (examShiftId && duration) {
-      const totalTime = parseInt(duration, 10) * 60;
-      setRemainingTime(totalTime);
+  if (examShiftId && duration) {
+    const totalTime = parseInt(duration, 10) * 60;
+    setRemainingTime(totalTime);
 
-      const fetchQuestions = async () => {
-        try {
-          const response = await axios.get(`http://localhost:8000/api/exam-questions/${examShiftId}`);
-          setQuestions(response.data);
-        } catch (error) {
-          console.error('Error fetching questions:', error);
+    const fetchQuestions = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/exam-questions/${examShiftId}`);
+        setQuestions(response.data);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      }
+    };
+
+    fetchQuestions();
+
+    const timer = setInterval(() => {
+      setRemainingTime(prevTime => {
+        if (prevTime <= 0) {
+          clearInterval(timer);
+          confirmSubmit();
+          return 0;
         }
-      };
+        return prevTime - 0.5;
+      });
+    }, 1000);
 
-      fetchQuestions();
+    setTimerId(timer);
+    
+  }
+}, []);
 
-      const timer = setInterval(() => {
-        setRemainingTime(prevTime => {
-          if (prevTime <= 0) {
-            clearInterval(timer);
-            return 0;
-          }
-          return prevTime - 1;
-        });
-      }, 1000);
-
-      return () => clearInterval(timer);
-    }
-  }, []);
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -73,6 +78,9 @@ const Test = () => {
 
   const confirmSubmit = useCallback(async () => {
     try {
+      if (timerId) {
+        clearInterval(timerId);
+      }
       const examShiftId = localStorage.getItem('examShiftId');
       const testId = localStorage.getItem('testId');
       const duration = localStorage.getItem('duration');
@@ -81,33 +89,26 @@ const Test = () => {
         QuestionAnswerId: questionId,
         SelectedOption: answers[questionId]
       }));
-  
+      
       const completionTime = totalDuration - remainingTime; // Calculate completion time
       localStorage.setItem('completionTime', completionTime);
-  
+      
       const dataToSend = {
         TestId: testId,
         answers: formattedAnswers,
         time: completionTime
       };
   
-      console.log('Data to be sent:', dataToSend);
-  
-      formattedAnswers.forEach((answer, index) => {
-        console.log(`Answer ${index + 1}:`, answer);
-      });
-  
       const response = await axios.post('http://localhost:8000/api/tests/submit', dataToSend);
   
-      console.log('Submission response:', response.data);
-      alert('Your answers have been submitted successfully!');
+      setShowSuccessModal(true); // Show success modal
       
-      navigate(`/test/${testId}`);
     } catch (error) {
       console.error('Error submitting answers:', error);
       alert('There was an error submitting your answers. Please try again.');
     }
-  }, [navigate, answers, remainingTime]);
+  }, [timerId, answers, remainingTime]);
+  
 
   const handleQuestionClick = (questionIndex) => {
     setCurrentQuestion(questionIndex);
@@ -162,47 +163,56 @@ const Test = () => {
                 <h3>Question {currentQuestion + 1}</h3>
                 <p>{questions[currentQuestion].question_answer.Content}</p>
                 <Form>
-      <Form.Check
-        type="radio"
-        id={`optionA-${questions[currentQuestion].question_answer.Id}`}
-        label={questions[currentQuestion].question_answer.OptionA}
-        name={`question-${questions[currentQuestion].question_answer.Id}`}
-        value="A"
-        checked={answers[questions[currentQuestion].question_answer.Id] === 'A'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'A') : undefined}
-        disabled={remainingTime <= 0}
-      />
-      <Form.Check
-        type="radio"
-        id={`optionB-${questions[currentQuestion].question_answer.Id}`}
-        label={questions[currentQuestion].question_answer.OptionB}
-        name={`question-${questions[currentQuestion].question_answer.Id}`}
-        value="B"
-        checked={answers[questions[currentQuestion].question_answer.Id] === 'B'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'B') : undefined}
-                    disabled={remainingTime <= 0}
-      />
-      <Form.Check
-        type="radio"
-        id={`optionC-${questions[currentQuestion].question_answer.Id}`}
-        label={questions[currentQuestion].question_answer.OptionC}
-        name={`question-${questions[currentQuestion].question_answer.Id}`}
-        value="C"
-        checked={answers[questions[currentQuestion].question_answer.Id] === 'C'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'C') : undefined}
-        disabled={remainingTime <= 0}
-      />
-      <Form.Check
-        type="radio"
-        id={`optionD-${questions[currentQuestion].question_answer.Id}`}
-        label={questions[currentQuestion].question_answer.OptionD}
-        name={`question-${questions[currentQuestion].question_answer.Id}`}
-        value="D"
-        checked={answers[questions[currentQuestion].question_answer.Id] === 'D'}
-        onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'D') : undefined}
-        disabled={remainingTime <= 0}
-      />
-    </Form>
+  {questions[currentQuestion].question_answer.OptionA && (
+    <Form.Check
+      type="radio"
+      id={`optionA-${questions[currentQuestion].question_answer.Id}`}
+      label={questions[currentQuestion].question_answer.OptionA}
+      name={`question-${questions[currentQuestion].question_answer.Id}`}
+      value="A"
+      checked={answers[questions[currentQuestion].question_answer.Id] === 'A'}
+      onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'A') : undefined}
+      disabled={remainingTime <= 0}
+    />
+  )}
+  {questions[currentQuestion].question_answer.OptionB && (
+    <Form.Check
+      type="radio"
+      id={`optionB-${questions[currentQuestion].question_answer.Id}`}
+      label={questions[currentQuestion].question_answer.OptionB}
+      name={`question-${questions[currentQuestion].question_answer.Id}`}
+      value="B"
+      checked={answers[questions[currentQuestion].question_answer.Id] === 'B'}
+      onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'B') : undefined}
+      disabled={remainingTime <= 0}
+    />
+  )}
+  {questions[currentQuestion].question_answer.OptionC && (
+    <Form.Check
+      type="radio"
+      id={`optionC-${questions[currentQuestion].question_answer.Id}`}
+      label={questions[currentQuestion].question_answer.OptionC}
+      name={`question-${questions[currentQuestion].question_answer.Id}`}
+      value="C"
+      checked={answers[questions[currentQuestion].question_answer.Id] === 'C'}
+      onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'C') : undefined}
+      disabled={remainingTime <= 0}
+    />
+  )}
+  {questions[currentQuestion].question_answer.OptionD && (
+    <Form.Check
+      type="radio"
+      id={`optionD-${questions[currentQuestion].question_answer.Id}`}
+      label={questions[currentQuestion].question_answer.OptionD}
+      name={`question-${questions[currentQuestion].question_answer.Id}`}
+      value="D"
+      checked={answers[questions[currentQuestion].question_answer.Id] === 'D'}
+      onChange={remainingTime > 0 ? () => handleOptionChange(questions[currentQuestion].question_answer.Id, 'D') : undefined}
+      disabled={remainingTime <= 0}
+    />
+  )}
+</Form>
+
               </Card.Body>
               <Card.Footer>
                 <Button
@@ -241,6 +251,23 @@ const Test = () => {
           {renderQuestionStatus()}
         </div>
       </div>
+{/* Success Modal */}
+<Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+  <Modal.Header closeButton>
+    <Modal.Title className="text-success text-center w-100">Submission Successful</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <p>Your answers have been submitted successfully!</p>
+  </Modal.Body>
+  <Modal.Footer className="justify-content-center">
+    <Button variant="primary" onClick={() => {
+      setShowSuccessModal(false);
+      navigate(`/test/${localStorage.getItem('testId')}`); // Navigate to the test page
+    }}>
+      OK
+    </Button>
+  </Modal.Footer>
+</Modal>
 
       {/* Confirmation Modal */}
       <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
