@@ -54,6 +54,21 @@ const ExamShiftCard = () => {
     setSelectedShift(null);
   };
 
+  const handleConfirmStartTest = () => {
+    if (selectedShift) {
+      const startTime = new Date(selectedShift.examShift.startTime).getTime();
+      const currentTime = new Date().getTime();
+      const timeDifference = startTime - currentTime;
+
+      if (timeDifference > 1800000) { // 30 minutes in milliseconds
+        alert("Your test hasn't started yet.");
+      } else {
+        navigate(`/room`);
+      }
+    }
+    handleCloseModal();
+  };
+
   const calculateRemainingTime = (startTime) => {
     const currentTime = new Date().getTime();
     const timeDifference = new Date(startTime).getTime() - currentTime;
@@ -75,6 +90,7 @@ const ExamShiftCard = () => {
           const startTime = new Date(shift.examShift.startTime).getTime();
           const endTime = new Date(shift.examShift.endTime).getTime();
           const isExpired = endTime < currentTime;
+          const isNearStart = startTime - currentTime <= 5 * 60 * 1000; // 5 minutes in milliseconds
 
           return (
             <Col md={4} key={shift.examShift.id} className="mb-4">
@@ -123,15 +139,9 @@ const ExamShiftCard = () => {
                     <Col>
                       <Button
                         variant="info"
-                        onClick={() => {
-                          if (startTime > currentTime) {
-                            handleShowModal(shift);
-                          } else {
-                            navigate(`/room`);
-                          }
-                        }}
+                        onClick={() => handleShowModal(shift)}
                         className="w-100"
-                        disabled={isExpired}
+                        disabled={isExpired && startTime > currentTime}
                       >
                         Start Test
                       </Button>
@@ -144,21 +154,24 @@ const ExamShiftCard = () => {
         })}
       </Row>
 
-      {/* Modal if test hasn't started yet */}
+      {/* Confirmation Modal */}
       <Modal
         show={showModal}
         onHide={handleCloseModal}
         dialogClassName="modal-dialog-centered"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Test Not Started</Modal.Title>
+          <Modal.Title>Confirm Start Test</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Your test hasn't started yet. Please wait until the start time.
+          Are you sure you want to start the test for this exam shift?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleCloseModal}>
-            OK
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleConfirmStartTest}>
+            Start Test
           </Button>
         </Modal.Footer>
       </Modal>
